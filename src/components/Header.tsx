@@ -221,7 +221,7 @@ export default function Header({
               >
                 <div className="relative">
                   <ShoppingCart className="w-6 h-6 text-white" />
-                  <span className="absolute -top-1 left-1/2 -translate-x-1/2 bg-plum text-white text-[10px] font-black rounded-full px-1 min-w-[16px] text-center leading-none py-0.5 shadow-sm">
+                  <span className="absolute -top-1 left-1/2 -translate-x-1/2 bg-orange text-gray-950 text-[10px] font-black rounded-full px-1 min-w-[16px] text-center leading-none py-0.5 shadow-sm">
                     {cartCount}
                   </span>
                 </div>
@@ -262,7 +262,7 @@ export default function Header({
           <div className="hidden md:flex flex-1 min-w-0 max-w-3xl items-center z-10 mx-2 lg:mx-4" id="search-bar-container">
             <form 
               onSubmit={handleSearchSubmit} 
-              className="w-full h-10 bg-white rounded-md flex items-center overflow-hidden focus-within:ring-2 focus-within:ring-plum border border-transparent transition-all"
+              className="w-full h-10 bg-white rounded-md flex items-center overflow-hidden focus-within:ring-2 focus-within:ring-orange border border-transparent transition-all"
             >
               {/* Left Department dropdown */}
               <select
@@ -299,10 +299,10 @@ export default function Header({
                 {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4.5 h-4.5" />}
               </button>
 
-              {/* Trigger Plum search button */}
+              {/* Trigger Orange search button */}
               <button 
                 type="submit"
-                className="h-full px-5 bg-plum hover:bg-plum/80 text-white flex items-center justify-center cursor-pointer transition-colors shrink-0"
+                className="h-full px-5 bg-orange hover:bg-orange/80 text-white flex items-center justify-center cursor-pointer transition-colors shrink-0"
                 aria-label="Submit Search Query"
               >
                 <Search className="w-5 h-5 stroke-[2.5]" />
@@ -375,7 +375,7 @@ export default function Header({
               >
                 <Heart className="w-4.5 h-4.5 text-plum-light fill-plum-light/15" />
                 {wishlistCount > 0 && (
-                  <span className="absolute top-0.5 right-0.5 bg-plum text-white text-[9px] font-black rounded-full w-3.5 h-3.5 flex items-center justify-center shadow-sm">
+                  <span className="absolute top-0.5 right-0.5 bg-orange text-white text-[9px] font-black rounded-full w-3.5 h-3.5 flex items-center justify-center shadow-sm">
                     {wishlistCount}
                   </span>
                 )}
@@ -392,7 +392,7 @@ export default function Header({
               >
                 <div className="relative">
                   <ShoppingCart className="w-5.5 h-5.5 text-white" />
-                  <span className="absolute -top-1 left-1/2 -translate-x-1/2 bg-plum text-white text-[10px] font-black rounded-full px-1 min-w-[16px] text-center leading-none py-0.5 shadow-sm group-hover:scale-105 transition-all duration-150">
+                  <span className="absolute -top-1 left-1/2 -translate-x-1/2 bg-orange text-gray-950 text-[10px] font-black rounded-full px-1 min-w-[16px] text-center leading-none py-0.5 shadow-sm group-hover:scale-105 transition-all duration-150">
                     {cartCount}
                   </span>
                 </div>
@@ -410,7 +410,7 @@ export default function Header({
         <div className="md:hidden px-4 pb-2.5 pt-1 bg-plum w-full" id="search-bar-container-mobile">
           <form 
             onSubmit={handleSearchSubmit} 
-            className="w-full h-10 bg-white rounded-md flex items-center overflow-hidden focus-within:ring-2 focus-within:ring-plum border border-transparent transition-all"
+            className="w-full h-10 bg-white rounded-md flex items-center overflow-hidden focus-within:ring-2 focus-within:ring-orange border border-transparent transition-all"
           >
             {/* Search text input */}
             <input 
@@ -435,7 +435,7 @@ export default function Header({
             {/* Trigger search button */}
             <button 
               type="submit"
-              className="h-full px-4 bg-plum hover:bg-plum/80 text-white flex items-center justify-center cursor-pointer transition-colors shrink-0"
+              className="h-full px-4 bg-orange hover:bg-orange/80 text-white flex items-center justify-center cursor-pointer transition-colors shrink-0"
               aria-label="Submit Search Query"
             >
               <Search className="w-5 h-5 stroke-[2.5]" />
@@ -542,7 +542,7 @@ export default function Header({
               <div className="flex items-center gap-3">
                 <button 
                   onClick={() => onViewChange('shop')}
-                  className="flex items-center gap-1 hover:text-white py-1 px-2.5 rounded bg-plum text-white cursor-pointer font-bold transition-all"
+                  className="flex items-center gap-1 hover:text-white py-1 px-2.5 rounded bg-orange text-white cursor-pointer font-bold transition-all"
                 >
                   <Store className="w-3 h-3" />
                   <span>View Storefront</span>
@@ -566,12 +566,12 @@ export default function Header({
       {/* 3. QUICK HORIZONTAL CATEGORIES RAIL (Sits beautifully under the subheaders) */}
       {currentView === 'shop' && (
         <nav className="bg-white dark:bg-gray-900 border-b border-gray-150 dark:border-gray-800 shadow-sm overflow-hidden select-none" id="quick-category-rail">
-          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex items-center gap-1.5 sm:gap-2 overflow-x-auto py-1.5 sm:py-2.5 scrollbar-none">
+          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex items-center gap-2 overflow-x-auto py-2.5 scrollbar-none">
             {categoryMeta.map((cat) => (
               <button
                 key={cat.key}
                 onClick={() => selectCategory(cat.key)}
-                className={`px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full font-extrabold text-[11px] sm:text-xs whitespace-nowrap transition-all cursor-pointer border ${
+                className={`px-3.5 py-1.5 rounded-full font-extrabold text-xs whitespace-nowrap transition-all cursor-pointer border ${
                   searchCategory === cat.key 
                     ? 'bg-plum text-white border-plum dark:bg-gray-100 dark:text-gray-900 dark:border-gray-100' 
                     : 'bg-gray-50 text-gray-600 border-gray-200 hover:bg-gray-100 dark:bg-gray-850 dark:text-gray-300 dark:border-gray-800 dark:hover:bg-gray-800'
@@ -842,7 +842,7 @@ export default function Header({
                   <span>Wishlist</span>
                 </span>
                 {wishlistCount > 0 && (
-                  <span className="bg-plum text-white text-[10px] px-2 py-0.5 rounded-full font-black">
+                  <span className="bg-orange text-white text-[10px] px-2 py-0.5 rounded-full font-black">
                     {wishlistCount}
                   </span>
                 )}
@@ -857,7 +857,7 @@ export default function Header({
                   <span>Shopping Cart</span>
                 </span>
                 {cartCount > 0 && (
-                  <span className="bg-plum text-white text-[10px] px-2 py-0.5 rounded-full font-black animate-pulse">
+                  <span className="bg-orange text-white text-[10px] px-2 py-0.5 rounded-full font-black animate-pulse">
                     {cartCount}
                   </span>
                 )}

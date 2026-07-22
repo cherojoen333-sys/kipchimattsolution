@@ -4,8 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kipchimatt Supermarket | Kenya's Online Grocery & More</title>
+    <script>
+      // Global error handler to catch cross-origin script errors gracefully
+      window.addEventListener('error', function(e) {
+        if (e.message === 'Script error.' || (e.filename && e.filename.indexOf('translate.google.com') !== -1)) {
+          e.stopImmediatePropagation();
+          return true;
+        }
+      }, true);
+    </script>
   </head>
   <body>
+    <div id="google_translate_element" style="display:none;"></div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

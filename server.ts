@@ -50,6 +50,20 @@ async function startServer() {
 
   // Load and seed states dynamically
   let products: Product[] = readData(PRODUCTS_FILE, defaultProducts);
+  
+  // Ensure any newly added default products (like our new cookies) are merged into the persistent dataset
+  let productsModified = false;
+  defaultProducts.forEach(dp => {
+    if (!products.some(p => p.id === dp.id)) {
+      products.push(dp);
+      productsModified = true;
+    }
+  });
+  if (productsModified) {
+    products.sort((a, b) => a.id - b.id);
+    writeData(PRODUCTS_FILE, products);
+  }
+
   let orders: Order[] = readData(ORDERS_FILE, []);
   let settings: StoreSettings = readData(SETTINGS_FILE, defaultSettings);
   let adminAlerts: any[] = readData(ALERTS_FILE, []);

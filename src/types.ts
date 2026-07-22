@@ -69,3 +69,11 @@ export interface CategoryMeta {
   icon: string;
   gated?: boolean;
 }
+
+export interface CookiePreferences {
+  essential: boolean;
+  functional: boolean;
+  analytics: boolean;
+  marketing: boolean;
+}
+

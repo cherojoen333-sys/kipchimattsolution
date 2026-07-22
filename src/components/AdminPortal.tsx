@@ -776,8 +776,8 @@ export default function AdminPortal({
                     <BarChart data={getLast7DaysData()}>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F3F4F6" />
                       <XAxis dataKey="name" stroke="#9CA3AF" />
-                      <YAxis stroke="#9CA3AF" tickFormatter={(v) => `KES ${v.toLocaleString()}`} />
-                      <Tooltip formatter={(value) => [`KES ${Number(value).toLocaleString()}`, 'Sales']} />
+                      <YAxis stroke="#9CA3AF" tickFormatter={(v) => `Ksh ${v.toLocaleString()}`} />
+                      <Tooltip formatter={(value) => [`Ksh ${Number(value).toLocaleString()}`, 'Sales']} />
                       <Bar dataKey="Sales" fill="var(--plum)" radius={[4, 4, 0, 0]} maxBarSize={42} />
                     </BarChart>
                   </ResponsiveContainer>
@@ -901,7 +901,7 @@ export default function AdminPortal({
 
               <div className="bg-white border border-gray-150 rounded-xl p-5 shadow-sm flex flex-col">
                 <h3 className="font-extrabold text-gray-800 text-sm mb-4 flex items-center gap-2">
-                  <Star className="w-4 h-4 text-plum fill-plum" />
+                  <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
                   <span>Top Retail Items</span>
                 </h3>
                 <div className="flex-1 space-y-3 max-h-[250px] overflow-y-auto text-xs">
@@ -1485,7 +1485,7 @@ export default function AdminPortal({
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                  <label className="block font-bold text-gray-700 uppercase tracking-wide mb-1.5">Free Delivery threshold (KES)</label>
+                  <label className="block font-bold text-gray-700 uppercase tracking-wide mb-1.5">Free Delivery threshold (Ksh)</label>
                   <input 
                     type="number" 
                     required 
@@ -1496,7 +1496,7 @@ export default function AdminPortal({
                   />
                 </div>
                 <div>
-                  <label className="block font-bold text-gray-700 uppercase tracking-wide mb-1.5">Base Delivery Fee (KES)</label>
+                  <label className="block font-bold text-gray-700 uppercase tracking-wide mb-1.5">Base Delivery Fee (Ksh)</label>
                   <input 
                     type="number" 
                     required 
@@ -1627,8 +1627,8 @@ export default function AdminPortal({
 
       {/* MODAL: Add / Edit Product */}
       {productModalOpen && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-xl max-h-[85vh] sm:max-h-[90vh] overflow-y-auto animate-slide-up">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-xl max-h-[90vh] overflow-y-auto animate-slide-up">
             <div className="p-5 border-b border-gray-150 flex items-center justify-between sticky top-0 bg-white z-10">
               <h3 className="font-extrabold text-base text-plum flex items-center gap-2">
                 <Boxes className="w-5 h-5" />
@@ -1697,7 +1697,7 @@ export default function AdminPortal({
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold mb-1.5">Retail Price (KES) *</label>
+                  <label className="block text-xs font-bold mb-1.5">Retail Price (Ksh) *</label>
                   <input 
                     type="number" 
                     required 
@@ -1708,7 +1708,7 @@ export default function AdminPortal({
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold mb-1.5">Original Strike Price (KES - For discount deals)</label>
+                  <label className="block text-xs font-bold mb-1.5">Original Strike Price (Ksh - For discount deals)</label>
                   <input 
                     type="number" 
                     min={0}
@@ -1806,8 +1806,8 @@ export default function AdminPortal({
 
       {/* MODAL: Detailed Order Sheets & Notes */}
       {viewingOrder && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[85vh] sm:max-h-[90vh] overflow-y-auto animate-slide-up">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto animate-slide-up">
             <div className="p-5 border-b border-gray-150 flex items-center justify-between sticky top-0 bg-white z-10">
               <h3 className="font-extrabold text-base text-plum flex items-center gap-2">
                 <FileText className="w-5 h-5" />

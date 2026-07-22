@@ -1,4 +1,5 @@
-import { X, Trash2, Heart, ShoppingCart } from 'lucide-react';
+import React from 'react';
+import { X, Heart, ShoppingBag, Trash2 } from 'lucide-react';
 import { Product } from '../types';
 import { formatMoney } from '../data/catalog';
 
@@ -8,7 +9,7 @@ interface WishlistSidebarProps {
   wishlist: number[];
   products: Product[];
   onRemoveWish: (id: number) => void;
-  onAddToCart: (product: Product) => void;
+  onAddToCart: (p: Product) => void;
 }
 
 export default function WishlistSidebar({
@@ -19,98 +20,51 @@ export default function WishlistSidebar({
   onRemoveWish,
   onAddToCart
 }: WishlistSidebarProps) {
-  
-  const savedItems = wishlist.map(id => products.find(p => p.id === id)).filter((p): p is Product => !!p);
-
   if (!isOpen) return null;
 
+  const savedProducts = products.filter(p => wishlist.includes(p.id));
+
   return (
-    <>
-      {/* Background Overlay */}
-      <div 
-        onClick={onClose}
-        className="fixed inset-0 bg-black/40 z-50 transition-opacity duration-300"
-      />
+    <div className="fixed inset-0 z-[9999] flex justify-end bg-black/60 backdrop-blur-sm animate-fade-in">
+      <div className="w-full max-w-md bg-white dark:bg-gray-900 h-full shadow-2xl flex flex-col justify-between p-6 animate-slide-left">
+        <div>
+          <div className="flex items-center justify-between pb-4 border-b border-gray-100 dark:border-gray-800">
+            <h2 className="text-lg font-black text-gray-900 dark:text-white flex items-center gap-2">
+              <Heart className="w-5 h-5 text-red-500 fill-red-500" />
+              <span>Saved Wishlist ({savedProducts.length})</span>
+            </h2>
+            <button onClick={onClose} className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-white rounded-full">
+              <X className="w-5 h-5" />
+            </button>
+          </div>
 
-      {/* Wishlist Drawer */}
-      <div className="fixed top-0 right-0 w-full sm:w-[420px] h-full bg-white shadow-2xl z-50 flex flex-col animate-slide-in">
-        
-        {/* Header */}
-        <div className="p-5 border-b border-gray-150 flex justify-between items-center bg-white sticky top-0 z-10">
-          <h3 className="font-extrabold text-plum text-base flex items-center gap-2">
-            <Heart className="w-5 h-5 text-red-500 fill-current" />
-            <span>Saved Wishlist ({wishlist.length})</span>
-          </h3>
-          <button 
-            onClick={onClose}
-            className="w-8 h-8 rounded-full bg-gray-50 hover:bg-red-50 hover:text-red-500 text-gray-400 flex items-center justify-center cursor-pointer transition-colors"
-            aria-label="Close Wishlist"
-          >
-            <X className="w-4 h-4" />
-          </button>
-        </div>
-
-        {/* Saved Items List */}
-        <div className="flex-1 overflow-y-auto p-5 space-y-4">
-          {savedItems.length > 0 ? (
-            savedItems.map(item => {
-              const isOutOfStock = item.stock <= 0;
-              return (
-                <div 
-                  key={item.id} 
-                  className="flex gap-4 p-3 border border-gray-100 rounded-xl hover:border-gray-150 transition-colors"
-                >
-                  <div className="w-16 h-16 bg-gray-50 rounded-lg overflow-hidden flex-shrink-0">
-                    <img 
-                      src={item.image || 'https://via.placeholder.com/64?text=Grocery'} 
-                      alt={item.name}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = 'https://via.placeholder.com/64?text=KP';
-                      }}
-                    />
-                  </div>
+          <div className="divide-y divide-gray-100 dark:divide-gray-800 max-h-[70vh] overflow-y-auto my-4 space-y-3">
+            {savedProducts.length === 0 ? (
+              <p className="text-xs text-gray-400 text-center py-12">No saved items yet.</p>
+            ) : (
+              savedProducts.map((p) => (
+                <div key={p.id} className="pt-3 flex items-center gap-3">
+                  <img src={p.image} alt={p.name} className="w-14 h-14 object-cover rounded-xl" />
                   <div className="flex-1 min-w-0">
-                    <h4 className="font-bold text-gray-800 text-xs sm:text-sm truncate">
-                      {item.name}
-                    </h4>
-                    <span className="text-[10px] text-gray-400 font-bold block mt-0.5">{item.brand}</span>
-                    <div className="text-xs font-black text-plum mt-1">
-                      {formatMoney(item.price)}
-                    </div>
-                    
-                    <div className="flex items-center justify-between mt-3 gap-2">
-                      <button 
-                        onClick={() => onAddToCart(item)}
-                        disabled={isOutOfStock}
-                        className={`py-1.5 px-3 rounded-lg font-bold text-[10px] flex items-center gap-1 cursor-pointer transition-colors ${isOutOfStock ? 'bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200/50' : 'bg-plum/5 hover:bg-plum/10 text-plum'}`}
-                      >
-                        <ShoppingCart className="w-3.5 h-3.5" />
-                        <span>{isOutOfStock ? 'Out of stock' : 'Add to cart'}</span>
-                      </button>
-
-                      <button 
-                        onClick={() => onRemoveWish(item.id)}
-                        className="text-red-500 hover:text-red-700 text-[10px] font-bold flex items-center gap-1 cursor-pointer transition-colors p-1"
-                        title="Remove from saved list"
-                      >
-                        <Trash2 className="w-3.5 h-3.5" />
-                        <span>Remove</span>
-                      </button>
-                    </div>
+                    <h4 className="font-extrabold text-xs text-gray-900 dark:text-white truncate">{p.name}</h4>
+                    <p className="text-xs font-bold text-plum">{formatMoney(p.price)}</p>
                   </div>
+                  <button
+                    onClick={() => onAddToCart(p)}
+                    className="bg-yellow text-plum font-black text-[10px] px-3 py-2 rounded-xl flex items-center gap-1 cursor-pointer hover:scale-105"
+                  >
+                    <ShoppingBag className="w-3 h-3" />
+                    <span>Add</span>
+                  </button>
+                  <button onClick={() => onRemoveWish(p.id)} className="text-red-500 hover:text-red-700">
+                    <Trash2 className="w-4 h-4" />
+                  </button>
                 </div>
-              );
-            })
-          ) : (
-            <div className="text-center py-24 text-gray-400 select-none">
-              <Heart className="w-16 h-16 mx-auto mb-4 opacity-20 text-plum" />
-              <h4 className="font-extrabold text-gray-700 text-sm mb-1">Your saved list is empty</h4>
-              <p className="text-xs text-gray-400 max-w-[220px] mx-auto leading-relaxed">Save your absolute favorite grocery items & Kikapu deals here by clicking the heart button.</p>
-            </div>
-          )}
+              ))
+            )}
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

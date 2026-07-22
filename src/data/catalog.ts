@@ -228,6 +228,87 @@ export const defaultProducts: Product[] = [
       'Manufacturer': 'Kenya Tea Packers Ltd'
     }
   },
+  {
+    id: 151,
+    name: 'Kipchimatt Choice Chocolate Chip Cookies 250g',
+    brand: 'Kipchimatt Choice',
+    category: 'food cupboard',
+    price: 145,
+    originalPrice: 185,
+    stock: 120,
+    image: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400&h=400&fit=crop',
+    description: 'Freshly baked and incredibly crunchy. Kipchimatt Choice Chocolate Chip Cookies are packed with premium, melted dark chocolate chips in every bite. Made with pure butter and real cane sugar for the ultimate teatime snack.',
+    rating: 4.9,
+    ratingCount: 158,
+    specifications: {
+      'Net Weight': '250 Grams',
+      'Flavor': 'Double Chocolate Chip',
+      'Allergens': 'Contains Wheat, Milk, Soy, Eggs',
+      'Type': 'Crispy Baked Cookies',
+      'Shelf Life': '4 Months'
+    },
+    reviews: [
+      { id: 'rc1', userName: 'Faith Cherotich', rating: 5, comment: 'These are the best chocolate chip cookies ever! So rich in chocolate chips.', date: '2026-07-02T10:30:00.000Z' }
+    ]
+  },
+  {
+    id: 152,
+    name: 'Nuvita Sweet Digestive Biscuits 400g',
+    brand: 'Nuvita',
+    category: 'food cupboard',
+    price: 180,
+    originalPrice: 220,
+    stock: 95,
+    image: 'https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?w=400&h=400&fit=crop',
+    description: 'Nuvita Digestive Biscuits are high-fiber wheat biscuits that support good digestion. Crisp, lightly sweetened, and absolutely perfect for pairing with your morning cup of Ketepa tea.',
+    rating: 4.7,
+    ratingCount: 88,
+    specifications: {
+      'Net Weight': '400 Grams',
+      'Type': 'Digestive Whole Wheat Biscuits',
+      'Fiber Content': 'High Fiber',
+      'Manufacturer': 'Mzuri Sweets Ltd',
+      'Origin': 'Kenya'
+    }
+  },
+  {
+    id: 153,
+    name: 'House of Manji Ginger Snaps 150g',
+    brand: 'House of Manji',
+    category: 'food cupboard',
+    price: 95,
+    originalPrice: 115,
+    stock: 150,
+    image: 'https://images.unsplash.com/photo-1600431521340-491ecd880be2?w=400&h=400&fit=crop',
+    description: 'The legendary ginger biscuit in Kenya! House of Manji Ginger Snaps offer a delightful fiery kick of real natural ginger, combined with a sweet golden crunch. A traditional favorite for decades.',
+    rating: 4.8,
+    ratingCount: 204,
+    specifications: {
+      'Net Weight': '150 Grams',
+      'Flavor': 'Spicy Ginger & Molasses',
+      'Manufacturer': 'House of Manji Ltd',
+      'Texture': 'Firm & Extra Crunchy'
+    }
+  },
+  {
+    id: 154,
+    name: 'Kipchimatt Luxury Fresh Butter Cookies 300g',
+    brand: 'Kipchimatt Choice',
+    category: 'food cupboard',
+    price: 210,
+    originalPrice: 260,
+    stock: 60,
+    image: 'https://images.unsplash.com/photo-1558961309-dbdf71799f5a?w=400&h=400&fit=crop',
+    description: 'Decadent, melt-in-your-mouth premium cookies baked with high-grade Danish butter. These luxury cookies have a delicate texture and rich aroma, packed in a beautiful re-sealable container to lock in freshness.',
+    rating: 4.9,
+    ratingCount: 74,
+    specifications: {
+      'Net Weight': '300 Grams',
+      'Butter Content': '18% Real Butter',
+      'Flavor': 'Sweet Cream Butter',
+      'Type': 'Shortbread-style Luxury Cookie'
+    }
+  },
 
   // FRESH FOOD
   { 

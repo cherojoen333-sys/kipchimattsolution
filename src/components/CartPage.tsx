@@ -492,8 +492,8 @@ export default function CartPage({
           
           {showFeedbackBox && (
             <div className="w-full bg-white rounded-3xl shadow-xl border border-gray-150 p-6 flex flex-col items-center text-center space-y-4 mb-6 relative overflow-hidden border-r-4 border-r-plum">
-              <div className="w-10 h-10 rounded-full bg-plum-fade text-plum flex items-center justify-center shadow-inner">
-                <Star className="w-5 h-5 fill-plum text-plum animate-bounce" />
+              <div className="w-10 h-10 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center shadow-inner">
+                <Star className="w-5 h-5 fill-amber-400 text-amber-500 animate-bounce" />
               </div>
 
               <div className="space-y-1">
@@ -523,7 +523,7 @@ export default function CartPage({
                           <Star 
                             className={`w-7 h-7 transition-colors ${
                               active 
-                                ? 'fill-plum text-plum' 
+                                ? 'fill-amber-400 text-amber-500' 
                                 : 'text-gray-300'
                             }`} 
                           />
@@ -683,7 +683,7 @@ export default function CartPage({
         </main>
 
         {/* SECURED CHECKOUT FOOTER */}
-        <footer className="bg-plum text-white/80 py-6 px-4 text-center text-[10px] font-bold border-t border-white/10">
+        <footer className="bg-gray-900 text-white/40 py-6 px-4 text-center text-[10px] font-bold border-t border-gray-800">
           <p className="max-w-md mx-auto leading-relaxed">
             &copy; {new Date().getFullYear()} Kipchimatt Supermarket Secured Checkout Protocol. All banking details and transactions are protected under secure cryptographic tokens.
           </p>
@@ -1260,13 +1260,13 @@ export default function CartPage({
       </main>
 
       {/* 3. SECURED CHECKOUT FOOTER */}
-      <footer className="bg-plum text-white/80 py-8 px-4 text-center text-[10px] font-bold border-t border-white/10 w-full">
+      <footer className="bg-gray-900 text-white/40 py-8 px-4 text-center text-[10px] font-bold border-t border-gray-800 w-full">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="max-w-md text-left leading-relaxed">
             &copy; {new Date().getFullYear()} Kipchimatt Secure Checkout Protocol. Secured using 256-bit Advanced Encryption Standards (AES). All orders are directly fulfilled by registered storefront dispatch riders.
           </p>
           <div className="flex items-center gap-3">
-            <span className="bg-white/10 border border-white/20 px-3 py-1.5 rounded-lg text-white font-bold flex items-center gap-1 text-[11px]">
+            <span className="bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg text-white/80 font-bold flex items-center gap-1 text-[11px]">
               <Lock className="w-3 h-3 text-emerald-400" />
               <span>PCI-DSS Compliant</span>
             </span>

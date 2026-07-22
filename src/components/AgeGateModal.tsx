@@ -9,10 +9,10 @@ export default function AgeGateModal({ isOpen, onConfirm }: AgeGateModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 backdrop-blur-xs animate-fade-in select-none">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm max-h-[90vh] overflow-y-auto p-6 text-center animate-scale-up border border-gray-150">
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 animate-fade-in select-none">
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6 text-center animate-scale-up border border-gray-150">
         
-        <div className="w-16 h-16 rounded-full bg-plum/5 text-plum flex items-center justify-center mx-auto mb-4 border border-plum/15">
+        <div className="w-16 h-16 rounded-full bg-amber-50 text-amber-700 flex items-center justify-center mx-auto mb-4 border border-amber-100">
           <Wine className="w-8 h-8" />
         </div>
 

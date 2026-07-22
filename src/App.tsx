@@ -10,6 +10,7 @@ import {
 
 // Components
 import Header from './components/Header';
+import CookieConsent from './components/CookieConsent';
 import Hero from './components/Hero';
 import Storefront from './components/Storefront';
 import AdminPortal from './components/AdminPortal';
@@ -22,7 +23,6 @@ import ProductDetailModal from './components/ProductDetailModal';
 import UserProfileModal from './components/UserProfileModal';
 import CompareModal from './components/CompareModal';
 import SeasonalParticles from './components/SeasonalParticles';
-import CookieBanner from './components/CookieBanner';
 
 interface ToastMsg {
   id: string;
@@ -34,7 +34,19 @@ export default function App() {
   // --- Persistent States from LocalStorage ---
   const [products, setProducts] = useState<Product[]>(() => {
     const saved = localStorage.getItem('kipchimatt_products');
-    return saved ? JSON.parse(saved) : defaultProducts;
+    const list = saved ? JSON.parse(saved) : defaultProducts;
+    let modified = false;
+    defaultProducts.forEach(dp => {
+      if (!list.some((p: any) => p.id === dp.id)) {
+        list.push(dp);
+        modified = true;
+      }
+    });
+    if (modified) {
+      list.sort((a: any, b: any) => a.id - b.id);
+      localStorage.setItem('kipchimatt_products', JSON.stringify(list));
+    }
+    return list;
   });
 
   const [orders, setOrders] = useState<Order[]>(() => {
@@ -69,6 +81,7 @@ export default function App() {
   });
 
   // --- Drawers & Modals Toggles ---
+  const [cookieSettingsForceOpen, setCookieSettingsForceOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
@@ -185,7 +198,7 @@ export default function App() {
 
     (window as any).googleTranslateElementInit = () => {
       try {
-        if ((window as any).google && (window as any).google.translate) {
+        if ((window as any).google && (window as any).google.translate && document.getElementById('google_translate_element')) {
           new (window as any).google.translate.TranslateElement({
             pageLanguage: 'en',
             layout: (window as any).google.translate.TranslateElement.InlineLayout.SIMPLE,
@@ -217,22 +230,6 @@ export default function App() {
   useEffect(() => {
     document.documentElement.style.fontSize = `${fontSizeScale * 100}%`;
   }, [fontSizeScale]);
-
-  useEffect(() => {
-    if (monochrome) {
-      document.body.classList.add('accessibility-monochrome');
-    } else {
-      document.body.classList.remove('accessibility-monochrome');
-    }
-  }, [monochrome]);
-
-  useEffect(() => {
-    if (highContrast) {
-      document.body.classList.add('high-contrast');
-    } else {
-      document.body.classList.remove('high-contrast');
-    }
-  }, [highContrast]);
 
   // --- Low Stock Urgent Notification Timer ---
   useEffect(() => {
@@ -305,33 +302,33 @@ export default function App() {
 
   // Load initial datasets from our separate Express API backend on mount
   useEffect(() => {
+    const safeFetch = async (url: string) => {
+      try {
+        const res = await fetch(url);
+        if (res.ok) {
+          return await res.json();
+        }
+      } catch (e) {
+        // Safe silent fallback to local storage / default state
+      }
+      return null;
+    };
+
     const loadInitialData = async () => {
       try {
-        const [pRes, oRes, sRes, aRes] = await Promise.all([
-          fetch('/api/products'),
-          fetch('/api/orders'),
-          fetch('/api/settings'),
-          fetch('/api/admin-alerts')
+        const [pData, oData, sData, aData] = await Promise.all([
+          safeFetch('/api/products'),
+          safeFetch('/api/orders'),
+          safeFetch('/api/settings'),
+          safeFetch('/api/admin-alerts')
         ]);
         
-        if (pRes.ok) {
-          const pData = await pRes.json();
-          if (pData && pData.length > 0) setProducts(pData);
-        }
-        if (oRes.ok) {
-          const oData = await oRes.json();
-          setOrders(oData);
-        }
-        if (sRes.ok) {
-          const sData = await sRes.json();
-          setSettings(sData);
-        }
-        if (aRes.ok) {
-          const aData = await aRes.json();
-          setAdminAlerts(aData);
-        }
+        if (Array.isArray(pData) && pData.length > 0) setProducts(pData);
+        if (Array.isArray(oData)) setOrders(oData);
+        if (sData && typeof sData === 'object') setSettings(sData);
+        if (Array.isArray(aData)) setAdminAlerts(aData);
       } catch (err) {
-        console.error("Error loading backend data:", err);
+        // Safe silent fallback
       } finally {
         setIsInitialLoaded(true);
       }
@@ -347,7 +344,7 @@ export default function App() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(adminAlerts)
-      }).catch(err => console.error("Failed to sync admin alerts to backend:", err));
+      }).catch(() => {});
     }
   }, [adminAlerts, isInitialLoaded]);
 
@@ -383,7 +380,7 @@ export default function App() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(products)
-      }).catch(err => console.error("Failed to sync products to backend:", err));
+      }).catch(() => {});
     }
   }, [products, isInitialLoaded]);
 
@@ -394,7 +391,7 @@ export default function App() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(orders)
-      }).catch(err => console.error("Failed to sync orders to backend:", err));
+      }).catch(() => {});
     }
   }, [orders, isInitialLoaded]);
 
@@ -405,7 +402,7 @@ export default function App() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(settings)
-      }).catch(err => console.error("Failed to sync settings to backend:", err));
+      }).catch(() => {});
     }
   }, [settings, isInitialLoaded]);
 
@@ -753,8 +750,10 @@ export default function App() {
         </div>
       )}
 
-      {/* Universal Sticky Header */}
-      <Header 
+      {/* Main layout container scoped under monochrome & highContrast filters if active */}
+      <div className={`flex-1 flex flex-col ${monochrome ? 'accessibility-monochrome' : ''} ${highContrast ? 'high-contrast' : ''}`}>
+        {/* Universal Sticky Header */}
+        <Header 
         settings={settings}
         currentView={currentView}
         onViewChange={(view) => {
@@ -917,8 +916,8 @@ export default function App() {
                     <a href="#" className="hover:text-white transition-all hover:underline">Our Kenyan Partners</a>
                     <a href="#" className="hover:text-white transition-all hover:underline">Privacy Policy</a>
                     <button 
-                      onClick={() => window.dispatchEvent(new Event('open-cookie-banner'))}
-                      className="text-left hover:text-white transition-all hover:underline cursor-pointer text-xs font-semibold text-white/85"
+                      onClick={() => setCookieSettingsForceOpen(true)}
+                      className="text-left w-fit hover:text-white transition-all hover:underline cursor-pointer"
                     >
                       Cookie Preferences
                     </button>
@@ -995,6 +994,7 @@ export default function App() {
           onTriggerLowStockEmail={handleTriggerLowStockEmail}
         />
       )}
+      </div>
 
       {/* --- Universal Overlay Components --- */}
       
@@ -1041,6 +1041,12 @@ export default function App() {
       <AgeGateModal 
         isOpen={ageGateOpen}
         onConfirm={handleAgeConfirm}
+      />
+
+      {/* Cookie Consent Banner & Custom Preferences modal */}
+      <CookieConsent 
+        forceOpenTrigger={cookieSettingsForceOpen}
+        onCloseForceTrigger={() => setCookieSettingsForceOpen(false)}
       />
 
       {/* Dynamic Detailed Product Page Modal */}
@@ -1226,17 +1232,6 @@ export default function App() {
                 />
               </label>
 
-              {/* Cookie Consent Settings Trigger */}
-              <button
-                onClick={() => {
-                  window.dispatchEvent(new Event('open-cookie-banner'));
-                  setAccessibilityOpen(false);
-                }}
-                className="w-full bg-plum-fade hover:bg-plum/15 text-plum font-extrabold text-[11px] py-2 rounded-xl transition-colors cursor-pointer flex items-center justify-center gap-1.5 border border-plum/20"
-              >
-                <span>Manage Cookie Preferences</span>
-              </button>
-
               {/* Reset Defaults button */}
               <button
                 onClick={() => {
@@ -1326,9 +1321,6 @@ export default function App() {
 
       {/* Hidden google translate container to prevent initialization scripts from throwing a Script error */}
       <div id="google_translate_element" style={{ display: 'none' }}></div>
-
-      {/* Cookie Consent Banner */}
-      <CookieBanner />
 
     </div>
   );

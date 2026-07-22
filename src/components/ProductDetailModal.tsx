@@ -170,25 +170,25 @@ export default function ProductDetailModal({
     .slice(0, 4);
 
   return (
-    <div className="fixed inset-0 bg-black/65 flex items-center justify-center p-3 sm:p-4 z-50 backdrop-blur-xs animate-fade-in">
+    <div className="fixed inset-0 bg-black/65 flex items-center justify-center p-2 sm:p-4 z-50 backdrop-blur-xs animate-fade-in">
       {/* Scrollable Container Card */}
-      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-4xl max-h-[85vh] sm:max-h-[90vh] overflow-y-auto animate-scale-up relative border border-gray-150 flex flex-col scrollbar-none">
+      <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-4xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto animate-scale-up relative border border-gray-150 flex flex-col scrollbar-none">
         
         {/* Floating Close Button */}
         <button 
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-white/90 hover:bg-red-50 text-gray-500 hover:text-red-500 shadow-md flex items-center justify-center cursor-pointer transition-colors"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/90 hover:bg-red-50 text-gray-500 hover:text-red-500 shadow-md flex items-center justify-center cursor-pointer transition-colors"
           aria-label="Close Product Page"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
 
         {/* Content Body Grid */}
-        <div className="p-5 sm:p-8 grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 flex-1">
+        <div className="p-4 sm:p-8 grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-8 flex-1">
           
           {/* Column Left: High Definition Image & Quick Badges (md:span-5) */}
           <div className="md:col-span-5 space-y-4">
-            <div className="aspect-square w-full rounded-2xl bg-gray-50 border border-gray-150 overflow-hidden relative shadow-sm group">
+            <div className="aspect-[4/3] sm:aspect-square w-full max-h-[240px] sm:max-h-none rounded-xl sm:rounded-2xl bg-gray-50 border border-gray-150 overflow-hidden relative shadow-sm group">
               <img 
                 src={product.image || 'https://via.placeholder.com/450?text=Kipchimatt'} 
                 alt={product.name}
@@ -325,45 +325,56 @@ export default function ProductDetailModal({
 
             {/* Quantities & Add to basket Actions bar */}
             <div className="space-y-3">
-              <div className="flex flex-wrap items-center gap-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                 
-                {/* Quantity Control (only show if instock) */}
-                {!isOutOfStock && (
-                  <div className="flex items-center gap-3 bg-white border border-gray-200 rounded-xl p-1.5 shadow-sm">
-                    <button 
-                      onClick={() => handleQtyChange(-1)}
-                      disabled={qty <= 1}
-                      className="w-8 h-8 rounded-lg bg-gray-50 border border-gray-250 hover:bg-gray-100 flex items-center justify-center text-gray-600 cursor-pointer text-sm font-bold disabled:opacity-50"
-                    >
-                      <Minus className="w-3.5 h-3.5" />
-                    </button>
-                    <span className="text-xs sm:text-sm font-black text-gray-800 w-6 text-center select-none">
-                      {qty}
-                    </span>
-                    <button 
-                      onClick={() => handleQtyChange(1)}
-                      disabled={qty >= product.stock}
-                      className="w-8 h-8 rounded-lg bg-gray-50 border border-gray-250 hover:bg-gray-100 flex items-center justify-center text-gray-600 cursor-pointer text-sm font-bold disabled:opacity-50"
-                    >
-                      <Plus className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                )}
+                <div className="flex items-center gap-3 w-full sm:w-auto">
+                  {/* Quantity Control (only show if instock) */}
+                  {!isOutOfStock && (
+                    <div className="flex items-center gap-3 bg-white border border-gray-200 rounded-xl p-1.5 shadow-sm flex-1 sm:flex-initial justify-between">
+                      <button 
+                        onClick={() => handleQtyChange(-1)}
+                        disabled={qty <= 1}
+                        className="w-8 h-8 rounded-lg bg-gray-50 border border-gray-250 hover:bg-gray-100 flex items-center justify-center text-gray-600 cursor-pointer text-sm font-bold disabled:opacity-50"
+                      >
+                        <Minus className="w-3.5 h-3.5" />
+                      </button>
+                      <span className="text-xs sm:text-sm font-black text-gray-800 w-6 text-center select-none">
+                        {qty}
+                      </span>
+                      <button 
+                        onClick={() => handleQtyChange(1)}
+                        disabled={qty >= product.stock}
+                        className="w-8 h-8 rounded-lg bg-gray-50 border border-gray-250 hover:bg-gray-100 flex items-center justify-center text-gray-600 cursor-pointer text-sm font-bold disabled:opacity-50"
+                      >
+                        <Plus className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Wishlist Heart on Mobile (Inline layout helper) */}
+                  <button 
+                    onClick={() => onToggleWishlist(product.id)}
+                    className={`w-12 h-12 rounded-xl border flex sm:hidden items-center justify-center shadow-sm cursor-pointer hover:scale-105 transition-transform ${isWished ? 'bg-red-50 text-red-500 border-red-200' : 'bg-white text-gray-400 hover:text-red-500 border-gray-200'}`}
+                    title={isWished ? 'Remove from Saved Wishlist' : 'Add to Saved Wishlist'}
+                  >
+                    <Heart className={`w-5 h-5 ${isWished ? 'fill-current' : ''}`} />
+                  </button>
+                </div>
 
                 {/* Primary CTA Add to Basket */}
                 <button 
                   onClick={handleAddToCartClick}
                   disabled={isOutOfStock}
-                  className={`flex-1 min-w-[150px] py-3.5 px-6 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer shadow-md transition-all ${isOutOfStock ? 'bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed' : 'bg-plum text-white hover:bg-plum-dark hover:shadow-lg'}`}
+                  className={`flex-1 py-3.5 px-6 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer shadow-md transition-all ${isOutOfStock ? 'bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed' : 'bg-plum text-white hover:bg-plum-dark hover:shadow-lg'}`}
                 >
                   <ShoppingCart className="w-4 h-4" />
                   <span>{isOutOfStock ? 'Currently Sold Out' : `Add ${qty} to Basket • ${formatMoney(product.price * qty)}`}</span>
                 </button>
 
-                {/* Wishlist Heart */}
+                {/* Wishlist Heart on Desktop */}
                 <button 
                   onClick={() => onToggleWishlist(product.id)}
-                  className={`w-12 h-12 rounded-xl border flex items-center justify-center shadow-sm cursor-pointer hover:scale-105 transition-transform ${isWished ? 'bg-red-50 text-red-500 border-red-200' : 'bg-white text-gray-400 hover:text-red-500 border-gray-200'}`}
+                  className={`hidden sm:flex w-12 h-12 rounded-xl border items-center justify-center shadow-sm cursor-pointer hover:scale-105 transition-transform ${isWished ? 'bg-red-50 text-red-500 border-red-200' : 'bg-white text-gray-400 hover:text-red-500 border-gray-200'}`}
                   title={isWished ? 'Remove from Saved Wishlist' : 'Add to Saved Wishlist'}
                 >
                   <Heart className={`w-5 h-5 ${isWished ? 'fill-current' : ''}`} />
@@ -616,7 +627,7 @@ export default function ProductDetailModal({
                 <div className="md:col-span-8 flex flex-wrap items-center gap-4">
                   
                   {/* Item 1: Current Product */}
-                  <div className="flex items-center gap-3 bg-gray-50 p-3 rounded-xl border border-gray-150 max-w-[240px]">
+                  <div className="flex items-center gap-3 bg-gray-50 p-3 rounded-xl border border-gray-150 w-full sm:max-w-[240px] flex-1 min-w-[180px]">
                     <div className="relative w-12 h-12 rounded-lg overflow-hidden border border-gray-200 bg-white flex-shrink-0">
                       <img src={product.image} className="w-full h-full object-cover" alt={product.name} />
                       <span className="absolute bottom-0 right-0 bg-plum text-white text-[8px] px-1 font-bold rounded-tl">This Item</span>
@@ -632,7 +643,7 @@ export default function ProductDetailModal({
                     const isChecked = checkedSuggestIds.includes(item.id);
                     return (
                       <React.Fragment key={item.id}>
-                        <div className="text-gray-300 font-bold text-lg select-none">+</div>
+                        <div className="text-gray-300 font-bold text-lg select-none self-center">+</div>
                         
                         {/* Suggested Item Card */}
                         <div 
@@ -643,7 +654,7 @@ export default function ProductDetailModal({
                                 : [...prev, item.id]
                             );
                           }}
-                          className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer select-none transition-all max-w-[240px] ${
+                          className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer select-none transition-all w-full sm:max-w-[240px] flex-1 min-w-[180px] ${
                             isChecked 
                               ? 'bg-plum-fade border-plum text-plum' 
                               : 'bg-gray-50/50 border-gray-150 text-gray-800 opacity-60 hover:opacity-100'

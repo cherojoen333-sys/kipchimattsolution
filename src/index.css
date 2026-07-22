@@ -183,22 +183,22 @@ html, body, #root {
 }
 
 /* Accessibility Modes overrides */
-body.accessibility-monochrome {
+.accessibility-monochrome {
   filter: grayscale(100%) !important;
 }
 
-body.high-contrast {
+.high-contrast {
   filter: contrast(135%) saturate(120%) !important;
 }
 
-body.high-contrast input,
-body.high-contrast select,
-body.high-contrast textarea {
+.high-contrast input,
+.high-contrast select,
+.high-contrast textarea {
   border-width: 2px !important;
   border-color: #000000 !important;
 }
-.dark body.high-contrast input,
-.dark body.high-contrast select,
-.dark body.high-contrast textarea {
+.dark .high-contrast input,
+.dark .high-contrast select,
+.dark .high-contrast textarea {
   border-color: #ffffff !important;
 }

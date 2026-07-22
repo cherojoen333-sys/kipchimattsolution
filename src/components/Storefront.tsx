@@ -257,7 +257,7 @@ export default function Storefront({
       >
         <div 
           onClick={() => onProductClick(p)}
-          className="h-32 sm:h-40 md:h-48 bg-gray-50 flex items-center justify-center relative overflow-hidden cursor-pointer"
+          className="h-28 xs:h-36 sm:h-48 bg-gray-50 flex items-center justify-center relative overflow-hidden cursor-pointer"
         >
           <img 
             src={p.image || 'https://via.placeholder.com/400?text=Kipchimatt'} 
@@ -270,79 +270,83 @@ export default function Storefront({
           />
           
           {discount > 0 && (
-            <span className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5 bg-plum text-white font-extrabold text-[9px] sm:text-[10px] px-2 py-0.5 sm:px-2.5 sm:py-1 rounded shadow-sm">
+            <span className="absolute top-1.5 left-1.5 sm:top-2.5 sm:left-2.5 bg-plum text-white font-extrabold text-[8px] sm:text-[10px] px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded shadow-sm">
               -{discount}%
             </span>
           )}
 
           {showBadge && discount > 0 && (
-            <span className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 bg-plum text-white font-bold text-[8px] sm:text-[9px] px-1.5 py-0.5 sm:px-2 rounded uppercase tracking-wider shadow-sm flex items-center gap-0.5">
+            <span className="absolute top-1.5 right-1.5 sm:top-2.5 sm:right-2.5 bg-plum text-white font-bold text-[7px] sm:text-[9px] px-1 sm:px-2 py-0.5 rounded uppercase tracking-wider shadow-sm flex items-center gap-0.5">
               <Sparkle className="w-2 h-2 sm:w-2.5 sm:h-2.5" />
-              <span>Deal</span>
+              <span className="hidden xs:inline">Deal</span>
             </span>
           )}
 
           <button 
             onClick={(e) => { e.stopPropagation(); onToggleWishlist(p.id); }}
-            className={`absolute bottom-2 right-2 sm:bottom-2.5 sm:right-2.5 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shadow-md cursor-pointer transition-transform duration-200 hover:scale-115 ${isWished ? 'bg-plum-fade text-plum' : 'bg-white/90 text-gray-400 hover:text-plum'}`}
+            className={`absolute bottom-1.5 right-1.5 sm:bottom-2.5 sm:right-2.5 w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shadow-md cursor-pointer transition-transform duration-200 hover:scale-115 ${isWished ? 'bg-plum-fade text-plum' : 'bg-white/90 text-gray-400 hover:text-plum'}`}
             title={isWished ? 'Remove from wishlist' : 'Save for later'}
           >
-            <Heart className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isWished ? 'fill-current' : ''}`} />
+            <Heart className={`w-3 h-3 sm:w-4 sm:h-4 ${isWished ? 'fill-current' : ''}`} />
           </button>
         </div>
 
-        <div className="p-2.5 sm:p-4 flex-1 flex flex-col">
-          <div className="flex items-center justify-between gap-1 mb-1">
-            <span className="text-[9px] sm:text-[10px] text-plum font-black uppercase tracking-wider truncate">
+        <div className="p-2 sm:p-4 flex-1 flex flex-col">
+          <div className="flex items-center justify-between gap-1 mb-0.5 sm:mb-1">
+            <span className="text-[8px] sm:text-[10px] text-plum font-black uppercase tracking-widest truncate max-w-[60%]">
               {p.brand || 'Kipchimatt'}
             </span>
             {p.rating && (
               <div className="flex items-center gap-0.5 text-xs text-plum font-bold" title={`${p.rating} / 5 Customer Rating`}>
-                <div className="flex items-center gap-0.5">
+                <div className="hidden sm:flex items-center gap-0.5">
                   {[1, 2, 3, 4, 5].map((starVal) => {
                     const isFilled = starVal <= Math.round(p.rating || 0);
                     return (
                       <Star 
                         key={starVal} 
-                        className={`w-2 h-2 sm:w-2.5 sm:h-2.5 ${isFilled ? 'fill-plum text-plum' : 'text-gray-200'}`} 
+                        className={`w-2.5 h-2.5 ${isFilled ? 'fill-plum text-plum' : 'text-gray-200'}`} 
                       />
                     );
                   })}
                 </div>
-                <span className="text-[8px] sm:text-[9px] text-gray-500 font-black ml-0.5">({p.rating})</span>
+                <div className="flex sm:hidden items-center gap-0.5 text-[9px]">
+                  <Star className="w-2 h-2 fill-plum text-plum" />
+                  <span>{p.rating}</span>
+                </div>
+                <span className="text-[8px] sm:text-[9px] text-gray-500 font-black ml-0.5">({p.ratingCount || p.rating})</span>
               </div>
             )}
           </div>
           <h4 
             onClick={() => onProductClick(p)}
-            className="font-bold text-gray-800 text-[11px] sm:text-xs md:text-sm line-clamp-2 h-8 sm:h-10 leading-tight mb-1.5 group-hover:text-plum transition-colors cursor-pointer"
+            className="font-bold text-gray-800 text-[11px] sm:text-sm line-clamp-2 h-8 sm:h-10 leading-tight mb-1.5 sm:mb-2 group-hover:text-plum transition-colors cursor-pointer"
           >
             {p.name}
           </h4>
 
           <div className="mb-2 sm:mb-3">
             <div className="flex items-baseline gap-1 sm:gap-1.5 flex-wrap">
-              <span className="text-sm sm:text-base font-extrabold text-plum">
+              <span className="text-xs sm:text-base font-extrabold text-plum">
                 {formatMoney(p.price)}
               </span>
               {p.originalPrice > p.price && (
-                <span className="text-[10px] sm:text-[11px] text-gray-400 line-through">
+                <span className="text-[9px] sm:text-[11px] text-gray-400 line-through">
                   {formatMoney(p.originalPrice)}
                 </span>
               )}
             </div>
             {p.originalPrice > p.price && (
-              <span className="text-[9px] sm:text-[10px] text-emerald-600 font-extrabold block mt-0.5">
+              <span className="text-[8px] sm:text-[10px] text-emerald-600 font-extrabold block mt-0.5">
                 Save {formatMoney(p.originalPrice - p.price)} ({discount}%)
               </span>
             )}
             
-            <label className="flex items-center gap-1 sm:gap-1.5 mt-1.5 sm:mt-2.5 cursor-pointer select-none text-[10px] sm:text-[11px] font-bold text-gray-500 hover:text-plum dark:text-gray-450">
+            <label className="hidden sm:flex items-center gap-1.5 mt-2.5 cursor-pointer select-none text-[11px] font-bold text-gray-500 hover:text-plum dark:text-gray-450">
               <input 
                 type="checkbox"
                 checked={comparedProductIds.includes(p.id)}
                 onChange={(e) => { e.stopPropagation(); onToggleCompare(p); }}
-                className="rounded border-gray-350 dark:border-gray-755 text-plum focus:ring-plum w-3 h-3 sm:w-3.5 sm:h-3.5 cursor-pointer"
+                className="rounded border-gray-350 dark:border-gray-755 text-plum focus:ring-plum w-3.5 h-3.5 cursor-pointer"
               />
               <span>Compare specs</span>
             </label>
@@ -350,12 +354,12 @@ export default function Storefront({
 
           <div className="mt-auto">
             {isOutOfStock ? (
-              <div className="text-center text-[9px] sm:text-[10px] font-bold text-plum bg-plum-fade py-0.5 sm:py-1 rounded-md mb-1.5 flex items-center justify-center gap-1 border border-plum/15">
-                <AlertCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+              <div className="text-center text-[8px] sm:text-[10px] font-bold text-plum bg-plum-fade py-0.5 sm:py-1 rounded-md mb-1.5 sm:mb-2 flex items-center justify-center gap-1 border border-plum/15">
+                <AlertCircle className="w-2.5 h-2.5 sm:w-3.5 h-3.5" />
                 <span>Sold Out</span>
               </div>
             ) : isLowStock ? (
-              <div className="text-center text-[9px] sm:text-[10px] font-bold text-plum bg-plum-fade py-0.5 sm:py-1 rounded-md mb-1.5 border border-plum/15">
+              <div className="text-center text-[8px] sm:text-[10px] font-bold text-plum bg-plum-fade py-0.5 sm:py-1 rounded-md mb-1.5 sm:mb-2 border border-plum/15">
                 Only {p.stock} left
               </div>
             ) : null}
@@ -363,17 +367,17 @@ export default function Storefront({
             <button 
               onClick={() => handleAddToCartClick(p)}
               disabled={isOutOfStock}
-              className={`w-full py-1.5 sm:py-2 rounded-lg font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 sm:gap-1.5 cursor-pointer transition-colors ${isOutOfStock ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : addedProductId === p.id ? 'bg-emerald-600 text-white' : 'bg-plum text-white hover:bg-plum-dark'}`}
+              className={`w-full py-1.5 sm:py-2 rounded-lg font-bold text-[10px] sm:text-xs flex items-center justify-center gap-1 cursor-pointer transition-colors ${isOutOfStock ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : addedProductId === p.id ? 'bg-emerald-600 text-white' : 'bg-plum text-white hover:bg-plum-dark'}`}
             >
               {addedProductId === p.id ? (
                 <>
-                  <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                  <Check className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
                   <span>Added</span>
                 </>
               ) : (
                 <>
-                  <ShoppingCart className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                  <span>{isOutOfStock ? 'Out of Stock' : 'Add to Cart'}</span>
+                  <ShoppingCart className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
+                  <span>{isOutOfStock ? 'Sold Out' : 'Add to Cart'}</span>
                 </>
               )}
             </button>
@@ -397,7 +401,7 @@ export default function Storefront({
       >
         <div 
           onClick={() => onProductClick(p)}
-          className="h-32 sm:h-40 md:h-48 bg-gray-50 flex items-center justify-center relative overflow-hidden cursor-pointer"
+          className="h-28 xs:h-36 sm:h-48 bg-gray-50 flex items-center justify-center relative overflow-hidden cursor-pointer"
         >
           <img 
             src={p.image || 'https://via.placeholder.com/400?text=Kipchimatt'} 
@@ -410,76 +414,80 @@ export default function Storefront({
           />
           
           {discount > 0 && (
-            <span className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5 bg-plum text-white font-black text-[9px] sm:text-[10px] px-2 py-0.5 sm:px-2.5 sm:py-1 rounded shadow-sm">
+            <span className="absolute top-1.5 left-1.5 sm:top-2.5 sm:left-2.5 bg-plum text-white font-black text-[8px] sm:text-[10px] px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded shadow-sm">
               -{discount}%
             </span>
           )}
 
-          <span className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 bg-plum-fade text-plum font-black text-[8px] sm:text-[9px] px-2 py-0.5 rounded uppercase tracking-wider shadow-sm border border-plum/15">
+          <span className="absolute top-1.5 right-1.5 sm:top-2.5 sm:right-2.5 bg-plum-fade text-plum font-black text-[7px] sm:text-[9px] px-1.5 py-0.5 rounded uppercase tracking-wider shadow-sm border border-plum/15">
             {p.category}
           </span>
 
           <button 
             onClick={(e) => { e.stopPropagation(); onToggleWishlist(p.id); }}
-            className={`absolute bottom-2 right-2 sm:bottom-2.5 sm:right-2.5 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shadow-md cursor-pointer transition-transform duration-200 hover:scale-115 ${isWished ? 'bg-plum-fade text-plum' : 'bg-white/95 text-gray-400 hover:text-plum'}`}
+            className={`absolute bottom-1.5 right-1.5 sm:bottom-2.5 sm:right-2.5 w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shadow-md cursor-pointer transition-transform duration-200 hover:scale-115 ${isWished ? 'bg-plum-fade text-plum' : 'bg-white/95 text-gray-400 hover:text-plum'}`}
             title={isWished ? 'Remove from wishlist' : 'Save for later'}
           >
-            <Heart className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isWished ? 'fill-current' : ''}`} />
+            <Heart className={`w-3 h-3 sm:w-4 sm:h-4 ${isWished ? 'fill-current' : ''}`} />
           </button>
         </div>
 
-        <div className="p-2.5 sm:p-4 flex-1 flex flex-col">
-          <div className="flex items-center justify-between gap-1 mb-1">
-            <span className="text-[9px] sm:text-[10px] text-plum font-black uppercase tracking-wider truncate">
+        <div className="p-2 sm:p-4 flex-1 flex flex-col">
+          <div className="flex items-center justify-between gap-1 mb-0.5 sm:mb-1">
+            <span className="text-[8px] sm:text-[10px] text-plum font-black uppercase tracking-widest truncate max-w-[60%]">
               {p.brand || 'Lifestyle'}
             </span>
             {p.rating && (
               <div className="flex items-center gap-0.5 text-xs text-plum font-bold" title={`${p.rating} / 5 Customer Rating`}>
-                <div className="flex items-center gap-0.5">
+                <div className="hidden sm:flex items-center gap-0.5">
                   {[1, 2, 3, 4, 5].map((starVal) => {
                     const isFilled = starVal <= Math.round(p.rating || 0);
                     return (
                       <Star 
                         key={starVal} 
-                        className={`w-2 h-2 sm:w-2.5 sm:h-2.5 ${isFilled ? 'fill-plum text-plum' : 'text-gray-200'}`} 
+                        className={`w-2.5 h-2.5 ${isFilled ? 'fill-plum text-plum' : 'text-gray-200'}`} 
                       />
                     );
                   })}
                 </div>
-                <span className="text-[8px] sm:text-[9px] text-gray-500 font-black ml-0.5">({p.rating})</span>
+                <div className="flex sm:hidden items-center gap-0.5 text-[9px]">
+                  <Star className="w-2 h-2 fill-plum text-plum" />
+                  <span>{p.rating}</span>
+                </div>
+                <span className="text-[8px] sm:text-[9px] text-gray-500 font-black ml-0.5">({p.ratingCount || p.rating})</span>
               </div>
             )}
           </div>
           <h4 
             onClick={() => onProductClick(p)}
-            className="font-black text-gray-800 text-[11px] sm:text-xs md:text-sm line-clamp-2 h-8 sm:h-10 leading-tight mb-1.5 group-hover:text-plum transition-colors cursor-pointer"
+            className="font-black text-gray-800 text-[11px] sm:text-sm line-clamp-2 h-8 sm:h-10 leading-tight mb-1.5 sm:mb-2 group-hover:text-plum transition-colors cursor-pointer"
           >
             {p.name}
           </h4>
 
           <div className="mb-2 sm:mb-3">
             <div className="flex items-baseline gap-1 sm:gap-1.5 flex-wrap">
-              <span className="text-sm sm:text-base font-extrabold text-plum">
+              <span className="text-xs sm:text-base font-extrabold text-plum">
                 {formatMoney(p.price)}
               </span>
               {p.originalPrice > p.price && (
-                <span className="text-[10px] sm:text-[11px] text-gray-400 line-through">
+                <span className="text-[9px] sm:text-[11px] text-gray-400 line-through">
                   {formatMoney(p.originalPrice)}
                 </span>
               )}
             </div>
             {p.originalPrice > p.price && (
-              <span className="text-[9px] sm:text-[10px] text-green font-extrabold block mt-0.5">
+              <span className="text-[8px] sm:text-[10px] text-green font-extrabold block mt-0.5">
                 Save {formatMoney(p.originalPrice - p.price)} ({discount}%)
               </span>
             )}
             
-            <label className="flex items-center gap-1 sm:gap-1.5 mt-1.5 sm:mt-2.5 cursor-pointer select-none text-[10px] sm:text-[11px] font-bold text-gray-500 hover:text-plum dark:text-gray-450">
+            <label className="hidden sm:flex items-center gap-1.5 mt-2.5 cursor-pointer select-none text-[11px] font-bold text-gray-500 hover:text-plum dark:text-gray-450">
               <input 
                 type="checkbox"
                 checked={comparedProductIds.includes(p.id)}
                 onChange={(e) => { e.stopPropagation(); onToggleCompare(p); }}
-                className="rounded border-gray-350 dark:border-gray-755 text-plum focus:ring-plum w-3 h-3 sm:w-3.5 sm:h-3.5 cursor-pointer"
+                className="rounded border-gray-350 dark:border-gray-755 text-plum focus:ring-plum w-3.5 h-3.5 cursor-pointer"
               />
               <span>Compare specs</span>
             </label>
@@ -487,12 +495,12 @@ export default function Storefront({
 
           <div className="mt-auto">
             {isOutOfStock ? (
-              <div className="text-center text-[9px] sm:text-[10px] font-bold text-plum bg-plum-fade py-0.5 sm:py-1 rounded-md mb-1.5 flex items-center justify-center gap-1 border border-plum/15">
-                <AlertCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+              <div className="text-center text-[8px] sm:text-[10px] font-bold text-plum bg-plum-fade py-0.5 sm:py-1 rounded-md mb-1.5 sm:mb-2 flex items-center justify-center gap-1 border border-plum/15">
+                <AlertCircle className="w-2.5 h-2.5 sm:w-3.5 h-3.5" />
                 <span>Sold Out</span>
               </div>
             ) : isLowStock ? (
-              <div className="text-center text-[9px] sm:text-[10px] font-bold text-plum bg-plum-fade py-0.5 sm:py-1 rounded-md mb-1.5 border border-plum/15">
+              <div className="text-center text-[8px] sm:text-[10px] font-bold text-plum bg-plum-fade py-0.5 sm:py-1 rounded-md mb-1.5 sm:mb-2 border border-plum/15">
                 Only {p.stock} left
               </div>
             ) : null}
@@ -500,17 +508,17 @@ export default function Storefront({
             <button 
               onClick={() => handleAddToCartClick(p)}
               disabled={isOutOfStock}
-              className={`w-full py-1.5 sm:py-2 rounded-lg font-black text-[11px] sm:text-xs flex items-center justify-center gap-1 sm:gap-1.5 cursor-pointer transition-colors uppercase tracking-wider ${isOutOfStock ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : addedProductId === p.id ? 'bg-plum-light text-white' : 'bg-plum text-white hover:bg-plum-light'}`}
+              className={`w-full py-1.5 sm:py-2 rounded-lg font-black text-[10px] sm:text-xs flex items-center justify-center gap-1 cursor-pointer transition-colors uppercase tracking-wider ${isOutOfStock ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : addedProductId === p.id ? 'bg-plum-light text-white' : 'bg-plum text-white hover:bg-plum-light'}`}
             >
               {addedProductId === p.id ? (
                 <>
-                  <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                  <Check className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
                   <span>Added</span>
                 </>
               ) : (
                 <>
-                  <ShoppingCart className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                  <span>{isOutOfStock ? 'Out of Stock' : 'Add to Basket'}</span>
+                  <ShoppingCart className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
+                  <span>{isOutOfStock ? 'Sold Out' : 'Add to Basket'}</span>
                 </>
               )}
             </button>
@@ -778,25 +786,25 @@ export default function Storefront({
           /* Storefront Homepage view */
           <>
             {/* Shop by Category Grid Tiles */}
-            <section className="py-2.5 sm:py-3 md:py-6 overflow-hidden">
-              <div className="mb-2 sm:mb-3 md:mb-4 flex items-center justify-between">
-                <h2 className="text-sm md:text-base font-extrabold text-gray-800 flex items-center gap-1.5 md:gap-2">
-                  <LayoutGrid className="w-4 h-4 md:w-5 md:h-5 text-plum" />
+            <section className="py-6 overflow-hidden">
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="text-base font-extrabold text-gray-800 flex items-center gap-2">
+                  <LayoutGrid className="w-5 h-5 text-plum" />
                   <span>Shop by Category</span>
                 </h2>
-                <span className="text-[10px] md:hidden text-plum font-extrabold flex items-center gap-1 bg-plum-fade px-2.5 py-0.5 rounded-full border border-plum/15 animate-pulse select-none">Swipe &rarr;</span>
+                <span className="text-[10px] md:hidden text-gray-400 font-medium animate-pulse">Swipe &rarr;</span>
               </div>
-              <div className="flex md:grid overflow-x-auto md:overflow-x-visible pb-2.5 md:pb-0 gap-2 md:gap-3 md:grid-cols-6 lg:grid-cols-8 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-none scroll-smooth snap-x">
+              <div className="flex md:grid overflow-x-auto md:overflow-x-visible pb-3 md:pb-0 gap-2.5 md:gap-3 md:grid-cols-6 lg:grid-cols-8 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-none scroll-smooth snap-x">
                 {categoryMeta.map(c => (
                   <div 
                     key={c.key}
                     onClick={() => onCategorySelect(c.key)}
-                    className={`bg-white border ${activeCategory === c.key ? 'border-plum bg-plum-fade/60 shadow-sm ring-1 ring-plum' : 'border-gray-150'} rounded-xl p-2 sm:p-2.5 md:p-4 text-center cursor-pointer transition-all duration-200 hover:border-plum hover:shadow-md active:scale-95 select-none flex-shrink-0 w-20 sm:w-26 md:w-auto snap-start flex flex-col justify-center items-center group`}
+                    className="bg-white border border-gray-150 rounded-xl p-2.5 md:p-4 text-center cursor-pointer transition-all duration-200 hover:border-plum hover:shadow-md hover:-translate-y-0.5 select-none flex-shrink-0 w-22 sm:w-28 md:w-auto snap-start flex flex-col justify-center items-center"
                   >
-                    <div className={`w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full ${activeCategory === c.key ? 'bg-plum text-white' : 'bg-plum/5 text-plum group-hover:bg-plum group-hover:text-white'} transition-colors flex items-center justify-center mb-1 md:mb-1.5`}>
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-plum/5 text-plum flex items-center justify-center mb-1.5">
                       {getCategoryIcon(c.icon)}
                     </div>
-                    <span className={`text-[10px] md:text-[11px] ${activeCategory === c.key ? 'font-black text-plum' : 'font-bold text-gray-700'} block line-clamp-2 leading-tight h-5 md:h-auto flex items-center justify-center`}>
+                    <span className="text-[10px] md:text-[11px] font-bold text-gray-700 block line-clamp-2 leading-tight h-6 md:h-auto flex items-center justify-center">
                       {c.label}
                     </span>
                   </div>
@@ -913,10 +921,10 @@ export default function Storefront({
                 </div>
                 <div 
                   ref={dealsRef}
-                  className="flex gap-2.5 sm:gap-4 overflow-x-auto pb-4 scroll-smooth scrollbar-none snap-x snap-mandatory"
+                  className="flex gap-4 overflow-x-auto pb-4 scroll-smooth scrollbar-none snap-x snap-mandatory"
                 >
                   {deals.slice(0, 10).map(p => (
-                    <div key={p.id} className="min-w-[150px] max-w-[150px] sm:min-w-[185px] sm:max-w-[185px] md:min-w-[210px] md:max-w-[210px] snap-start">
+                    <div key={p.id} className="min-w-[210px] max-w-[210px] snap-start">
                       {renderProductCard(p, true)}
                     </div>
                   ))}
@@ -983,10 +991,10 @@ export default function Storefront({
                 </div>
                 <div 
                   ref={freshRef}
-                  className="flex gap-2.5 sm:gap-4 overflow-x-auto pb-4 scroll-smooth scrollbar-none snap-x snap-mandatory"
+                  className="flex gap-4 overflow-x-auto pb-4 scroll-smooth scrollbar-none snap-x snap-mandatory"
                 >
                   {fresh.slice(0, 8).map(p => (
-                    <div key={p.id} className="min-w-[150px] max-w-[150px] sm:min-w-[185px] sm:max-w-[185px] md:min-w-[210px] md:max-w-[210px] snap-start">
+                    <div key={p.id} className="min-w-[210px] max-w-[210px] snap-start">
                       {renderProductCard(p)}
                     </div>
                   ))}
@@ -1019,10 +1027,10 @@ export default function Storefront({
                 </div>
                 <div 
                   ref={beverageRef}
-                  className="flex gap-2.5 sm:gap-4 overflow-x-auto pb-4 scroll-smooth scrollbar-none snap-x snap-mandatory"
+                  className="flex gap-4 overflow-x-auto pb-4 scroll-smooth scrollbar-none snap-x snap-mandatory"
                 >
                   {beverages.slice(0, 8).map(p => (
-                    <div key={p.id} className="min-w-[150px] max-w-[150px] sm:min-w-[185px] sm:max-w-[185px] md:min-w-[210px] md:max-w-[210px] snap-start">
+                    <div key={p.id} className="min-w-[210px] max-w-[210px] snap-start">
                       {renderProductCard(p)}
                     </div>
                   ))}
@@ -1058,10 +1066,10 @@ export default function Storefront({
                 </div>
                 <div 
                   ref={liquorRef}
-                  className="flex gap-2.5 sm:gap-4 overflow-x-auto pb-4 scroll-smooth scrollbar-none snap-x snap-mandatory"
+                  className="flex gap-4 overflow-x-auto pb-4 scroll-smooth scrollbar-none snap-x snap-mandatory"
                 >
                   {liquor.slice(0, 8).map(p => (
-                    <div key={p.id} className="min-w-[150px] max-w-[150px] sm:min-w-[185px] sm:max-w-[185px] md:min-w-[210px] md:max-w-[210px] snap-start">
+                    <div key={p.id} className="min-w-[210px] max-w-[210px] snap-start">
                       {renderProductCard(p)}
                     </div>
                   ))}
