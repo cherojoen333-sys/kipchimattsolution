@@ -22,6 +22,7 @@ import ProductDetailModal from './components/ProductDetailModal';
 import UserProfileModal from './components/UserProfileModal';
 import CompareModal from './components/CompareModal';
 import SeasonalParticles from './components/SeasonalParticles';
+import CookieBanner from './components/CookieBanner';
 
 interface ToastMsg {
   id: string;
@@ -916,6 +917,12 @@ export default function App() {
                     <a href="#" className="hover:text-white transition-all hover:underline">Our Kenyan Partners</a>
                     <a href="#" className="hover:text-white transition-all hover:underline">Privacy Policy</a>
                     <button 
+                      onClick={() => window.dispatchEvent(new Event('open-cookie-banner'))}
+                      className="text-left hover:text-white transition-all hover:underline cursor-pointer text-xs font-semibold text-white/85"
+                    >
+                      Cookie Preferences
+                    </button>
+                    <button 
                       onClick={() => setCurrentView('admin')}
                       className="w-fit bg-white/10 hover:bg-white/20 text-white font-bold py-1.5 px-4 rounded-lg flex items-center gap-1.5 cursor-pointer transition-colors"
                     >
@@ -1219,6 +1226,17 @@ export default function App() {
                 />
               </label>
 
+              {/* Cookie Consent Settings Trigger */}
+              <button
+                onClick={() => {
+                  window.dispatchEvent(new Event('open-cookie-banner'));
+                  setAccessibilityOpen(false);
+                }}
+                className="w-full bg-plum-fade hover:bg-plum/15 text-plum font-extrabold text-[11px] py-2 rounded-xl transition-colors cursor-pointer flex items-center justify-center gap-1.5 border border-plum/20"
+              >
+                <span>Manage Cookie Preferences</span>
+              </button>
+
               {/* Reset Defaults button */}
               <button
                 onClick={() => {
@@ -1308,6 +1326,9 @@ export default function App() {
 
       {/* Hidden google translate container to prevent initialization scripts from throwing a Script error */}
       <div id="google_translate_element" style={{ display: 'none' }}></div>
+
+      {/* Cookie Consent Banner */}
+      <CookieBanner />
 
     </div>
   );

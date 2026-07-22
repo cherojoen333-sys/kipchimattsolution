@@ -170,97 +170,96 @@ export default function Hero({ onExploreCategory, onScrollToDeals, onScrollToBra
           </div>
         </div>
 
-        {/* Promo Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-          <div className="bg-gradient-to-br from-plum-fade to-plum-fade/30 border border-plum/25 rounded-xl p-6 relative overflow-hidden flex flex-col justify-between shadow-sm group">
+        {/* Promo Grid (Horizontal swipeable on small screens to save space) */}
+        <div className="flex md:grid overflow-x-auto md:overflow-x-visible pb-2 md:pb-0 gap-3 md:grid-cols-3 mt-3 sm:mt-4 scrollbar-none snap-x -mx-4 px-4 md:mx-0 md:px-0">
+          <div className="min-w-[78vw] sm:min-w-[260px] md:min-w-0 flex-1 snap-start bg-gradient-to-br from-plum-fade to-plum-fade/30 border border-plum/25 rounded-xl p-3.5 sm:p-5 relative overflow-hidden flex flex-col justify-between shadow-sm group select-none">
             <div className="z-10">
-              <span className="text-[10px] font-extrabold text-plum tracking-wider uppercase mb-1 block">Mega Savings</span>
-              <h3 className="font-extrabold text-gray-800 text-base mb-1">Today's Hot Deals</h3>
-              <p className="text-gray-500 text-xs mb-4">Save up to 40% off on premium food pantry and home items.</p>
+              <span className="text-[9px] sm:text-[10px] font-extrabold text-plum tracking-wider uppercase mb-0.5 sm:mb-1 block">Mega Savings</span>
+              <h3 className="font-extrabold text-gray-800 text-sm sm:text-base mb-0.5 sm:mb-1">Today's Hot Deals</h3>
+              <p className="text-gray-500 text-[11px] sm:text-xs mb-2 sm:mb-4 line-clamp-2">Save up to 40% off on premium food pantry and home items.</p>
             </div>
             <button 
               onClick={onScrollToDeals}
-              className="w-fit bg-plum hover:bg-plum/80 text-white text-[11px] font-extrabold px-4 py-2 rounded-lg cursor-pointer transition-colors shadow-sm"
+              className="w-fit bg-plum hover:bg-plum/80 text-white text-[10px] sm:text-[11px] font-extrabold px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg cursor-pointer transition-colors shadow-sm"
             >
               Shop Now
             </button>
-            <Tags className="w-20 h-20 text-plum/10 absolute -right-4 -bottom-4 -rotate-12 group-hover:scale-110 transition-transform" />
+            <Tags className="w-14 h-14 sm:w-20 sm:h-20 text-plum/10 absolute -right-3 -bottom-3 sm:-right-4 sm:-bottom-4 -rotate-12 group-hover:scale-110 transition-transform pointer-events-none" />
           </div>
 
-          <div className="bg-gradient-to-br from-plum-fade to-plum-fade/30 border border-plum/25 rounded-xl p-6 relative overflow-hidden flex flex-col justify-between shadow-sm group">
+          <div className="min-w-[78vw] sm:min-w-[260px] md:min-w-0 flex-1 snap-start bg-gradient-to-br from-plum-fade to-plum-fade/30 border border-plum/25 rounded-xl p-3.5 sm:p-5 relative overflow-hidden flex flex-col justify-between shadow-sm group select-none">
             <div className="z-10">
-              <span className="text-[10px] font-extrabold text-plum tracking-wider uppercase mb-1 block">100% Organic</span>
-              <h3 className="font-extrabold text-gray-800 text-base mb-1">Fresh from the Farm</h3>
-              <p className="text-gray-500 text-xs mb-4">Fresh handpicked vegetables, fruits, butchery cuts & dairy delivered daily.</p>
+              <span className="text-[9px] sm:text-[10px] font-extrabold text-plum tracking-wider uppercase mb-0.5 sm:mb-1 block">100% Organic</span>
+              <h3 className="font-extrabold text-gray-800 text-sm sm:text-base mb-0.5 sm:mb-1">Fresh from the Farm</h3>
+              <p className="text-gray-500 text-[11px] sm:text-xs mb-2 sm:mb-4 line-clamp-2">Fresh handpicked vegetables, fruits, butchery cuts & dairy delivered daily.</p>
             </div>
             <button 
               onClick={() => onExploreCategory('fresh food')}
-              className="w-fit bg-plum hover:bg-plum/80 text-white text-[11px] font-extrabold px-4 py-2 rounded-lg cursor-pointer transition-colors shadow-sm"
+              className="w-fit bg-plum hover:bg-plum/80 text-white text-[10px] sm:text-[11px] font-extrabold px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg cursor-pointer transition-colors shadow-sm"
             >
               Explore Fresh Food
             </button>
-            <Leaf className="w-20 h-20 text-plum/10 absolute -right-4 -bottom-4 -rotate-12 group-hover:scale-110 transition-transform" />
+            <Leaf className="w-14 h-14 sm:w-20 sm:h-20 text-plum/10 absolute -right-3 -bottom-3 sm:-right-4 sm:-bottom-4 -rotate-12 group-hover:scale-110 transition-transform pointer-events-none" />
           </div>
 
-          <div className="bg-gradient-to-br from-plum-fade to-plum-fade/30 border border-plum/25 rounded-xl p-6 relative overflow-hidden flex flex-col justify-between shadow-sm group">
+          <div className="min-w-[78vw] sm:min-w-[260px] md:min-w-0 flex-1 snap-start bg-gradient-to-br from-plum-fade to-plum-fade/30 border border-plum/25 rounded-xl p-3.5 sm:p-5 relative overflow-hidden flex flex-col justify-between shadow-sm group select-none">
             <div className="z-10">
-              <span className="text-[10px] font-extrabold text-plum tracking-wider uppercase mb-1 block">Best Brands</span>
-              <h3 className="font-extrabold text-gray-800 text-base mb-1">Explore by Brand</h3>
-              <p className="text-gray-500 text-xs mb-4">Choose from your absolute favorite domestic and global brands.</p>
+              <span className="text-[9px] sm:text-[10px] font-extrabold text-plum tracking-wider uppercase mb-0.5 sm:mb-1 block">Best Brands</span>
+              <h3 className="font-extrabold text-gray-800 text-sm sm:text-base mb-0.5 sm:mb-1">Explore by Brand</h3>
+              <p className="text-gray-500 text-[11px] sm:text-xs mb-2 sm:mb-4 line-clamp-2">Choose from your absolute favorite domestic and global brands.</p>
             </div>
             <button 
-              onClick={onScrollToDeals}
-              className="w-fit bg-plum hover:bg-plum/80 text-white text-[11px] font-extrabold px-4 py-2 rounded-lg cursor-pointer transition-colors shadow-sm"
+              onClick={onScrollToBrands}
+              className="w-fit bg-plum hover:bg-plum/80 text-white text-[10px] sm:text-[11px] font-extrabold px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg cursor-pointer transition-colors shadow-sm"
             >
               Discover Brands
             </button>
-            <Star className="w-20 h-20 text-plum/10 absolute -right-4 -bottom-4 -rotate-12 group-hover:scale-110 transition-transform" />
+            <Star className="w-14 h-14 sm:w-20 sm:h-20 text-plum/10 absolute -right-3 -bottom-3 sm:-right-4 sm:-bottom-4 -rotate-12 group-hover:scale-110 transition-transform pointer-events-none" />
           </div>
         </div>
 
-        {/* Features Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4 mt-6">
-          <div className="bg-white border border-gray-150 rounded-xl p-2.5 sm:p-4 flex items-center gap-2 sm:gap-3.5 shadow-sm hover:border-plum/20 hover:shadow transition-all">
-            <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-lg bg-plum-fade text-plum flex items-center justify-center flex-shrink-0">
-              <Truck className="w-4 h-4 sm:w-6 sm:h-6" />
+        {/* Features Bar (2x2 grid on small screens, 4-col grid on md+) */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3.5 mt-3 sm:mt-6">
+          <div className="bg-white border border-gray-150 rounded-xl p-2 sm:p-3 flex items-center gap-2 sm:gap-3 shadow-sm hover:border-plum/20 hover:shadow transition-all">
+            <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg bg-plum-fade text-plum flex items-center justify-center flex-shrink-0">
+              <Truck className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
             </div>
             <div className="min-w-0">
-              <h4 className="font-bold text-gray-800 text-xs sm:text-sm truncate">90-Min Delivery</h4>
-              <p className="text-gray-500 text-[10px] sm:text-xs mt-0.5 truncate sm:whitespace-normal">Prompt & active delivery</p>
+              <h4 className="font-bold text-gray-800 text-[11px] sm:text-xs md:text-sm truncate">90-Min Delivery</h4>
+              <p className="text-gray-500 text-[9px] sm:text-[10px] md:text-xs mt-0.5 truncate">Prompt delivery</p>
             </div>
           </div>
 
-          <div className="bg-white border border-gray-150 rounded-xl p-2.5 sm:p-4 flex items-center gap-2 sm:gap-3.5 shadow-sm hover:border-plum/20 hover:shadow transition-all">
-            <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-lg bg-plum-fade text-plum flex items-center justify-center flex-shrink-0">
-              <ShieldCheck className="w-4 h-4 sm:w-6 sm:h-6" />
+          <div className="bg-white border border-gray-150 rounded-xl p-2 sm:p-3 flex items-center gap-2 sm:gap-3 shadow-sm hover:border-plum/20 hover:shadow transition-all">
+            <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg bg-plum-fade text-plum flex items-center justify-center flex-shrink-0">
+              <ShieldCheck className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
             </div>
             <div className="min-w-0">
-              <h4 className="font-bold text-gray-800 text-xs sm:text-sm truncate">Secure Payments</h4>
-              <p className="text-gray-500 text-[10px] sm:text-xs mt-0.5 truncate sm:whitespace-normal">M-Pesa, Card & Cash</p>
+              <h4 className="font-bold text-gray-800 text-[11px] sm:text-xs md:text-sm truncate">Secure Payments</h4>
+              <p className="text-gray-500 text-[9px] sm:text-[10px] md:text-xs mt-0.5 truncate">M-Pesa & Cards</p>
             </div>
           </div>
 
-          <div className="bg-white border border-gray-150 rounded-xl p-2.5 sm:p-4 flex items-center gap-2 sm:gap-3.5 shadow-sm hover:border-plum/20 hover:shadow transition-all">
-            <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-lg bg-plum-fade text-plum flex items-center justify-center flex-shrink-0">
-              <RefreshCw className="w-4 h-4 sm:w-6 sm:h-6" />
+          <div className="bg-white border border-gray-150 rounded-xl p-2 sm:p-3 flex items-center gap-2 sm:gap-3 shadow-sm hover:border-plum/20 hover:shadow transition-all">
+            <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg bg-plum-fade text-plum flex items-center justify-center flex-shrink-0">
+              <RefreshCw className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
             </div>
             <div className="min-w-0">
-              <h4 className="font-bold text-gray-800 text-xs sm:text-sm truncate">Easy Returns</h4>
-              <p className="text-gray-500 text-[10px] sm:text-xs mt-0.5 truncate sm:whitespace-normal">Hassle-free 7-day policy</p>
+              <h4 className="font-bold text-gray-800 text-[11px] sm:text-xs md:text-sm truncate">Easy Returns</h4>
+              <p className="text-gray-500 text-[9px] sm:text-[10px] md:text-xs mt-0.5 truncate">7-day policy</p>
             </div>
           </div>
 
-          <div className="bg-white border border-gray-150 rounded-xl p-2.5 sm:p-4 flex items-center gap-2 sm:gap-3.5 shadow-sm hover:border-plum/20 hover:shadow transition-all">
-            <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-lg bg-plum-fade text-plum flex items-center justify-center flex-shrink-0">
-              <Headset className="w-4 h-4 sm:w-6 sm:h-6" />
+          <div className="bg-white border border-gray-150 rounded-xl p-2 sm:p-3 flex items-center gap-2 sm:gap-3 shadow-sm hover:border-plum/20 hover:shadow transition-all">
+            <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg bg-plum-fade text-plum flex items-center justify-center flex-shrink-0">
+              <Headset className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
             </div>
             <div className="min-w-0">
-              <h4 className="font-bold text-gray-800 text-xs sm:text-sm truncate">24/7 Care Support</h4>
-              <p className="text-gray-500 text-[10px] sm:text-xs mt-0.5 truncate sm:whitespace-normal">Friendly agents on standby</p>
+              <h4 className="font-bold text-gray-800 text-[11px] sm:text-xs md:text-sm truncate">24/7 Care Support</h4>
+              <p className="text-gray-500 text-[9px] sm:text-[10px] md:text-xs mt-0.5 truncate">Standby support</p>
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );

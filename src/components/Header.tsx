@@ -566,12 +566,12 @@ export default function Header({
       {/* 3. QUICK HORIZONTAL CATEGORIES RAIL (Sits beautifully under the subheaders) */}
       {currentView === 'shop' && (
         <nav className="bg-white dark:bg-gray-900 border-b border-gray-150 dark:border-gray-800 shadow-sm overflow-hidden select-none" id="quick-category-rail">
-          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex items-center gap-2 overflow-x-auto py-2.5 scrollbar-none">
+          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex items-center gap-1.5 sm:gap-2 overflow-x-auto py-1.5 sm:py-2.5 scrollbar-none">
             {categoryMeta.map((cat) => (
               <button
                 key={cat.key}
                 onClick={() => selectCategory(cat.key)}
-                className={`px-3.5 py-1.5 rounded-full font-extrabold text-xs whitespace-nowrap transition-all cursor-pointer border ${
+                className={`px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full font-extrabold text-[11px] sm:text-xs whitespace-nowrap transition-all cursor-pointer border ${
                   searchCategory === cat.key 
                     ? 'bg-plum text-white border-plum dark:bg-gray-100 dark:text-gray-900 dark:border-gray-100' 
                     : 'bg-gray-50 text-gray-600 border-gray-200 hover:bg-gray-100 dark:bg-gray-850 dark:text-gray-300 dark:border-gray-800 dark:hover:bg-gray-800'
