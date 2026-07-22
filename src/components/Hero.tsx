@@ -171,64 +171,64 @@ export default function Hero({ onExploreCategory, onScrollToDeals, onScrollToBra
         </div>
 
         {/* Promo Grid */}
-        <div className="flex overflow-x-auto snap-x scrollbar-none sm:grid sm:grid-cols-3 gap-2.5 sm:gap-4 mt-3.5 -mx-2 px-2 sm:mx-0 sm:px-0">
+        <div className="flex overflow-x-auto snap-x scrollbar-none sm:grid sm:grid-cols-3 gap-2.5 sm:gap-3.5 mt-3 -mx-2 px-2 sm:mx-0 sm:px-0">
           <div 
             onClick={onScrollToDeals}
-            className="bg-gradient-to-br from-plum-fade to-plum-fade/30 border border-plum/25 rounded-xl p-3 sm:p-4 md:p-6 relative overflow-hidden flex flex-col justify-between shadow-sm group cursor-pointer w-[68vw] min-w-[200px] max-w-[260px] sm:w-auto shrink-0 snap-start hover:border-plum/40 transition-all"
+            className="bg-gradient-to-br from-plum-fade to-plum-fade/30 border border-plum/25 rounded-xl p-3 sm:p-4 relative overflow-hidden flex flex-col justify-between shadow-sm group cursor-pointer w-[68vw] min-w-[200px] max-w-[260px] sm:w-auto shrink-0 snap-start hover:border-plum/40 transition-all"
           >
             <div className="z-10">
-              <span className="text-[9px] sm:text-[10px] font-extrabold text-plum tracking-wider uppercase mb-0.5 sm:mb-1 block">Mega Savings</span>
-              <h3 className="font-extrabold text-gray-800 text-xs sm:text-sm md:text-base mb-0.5 sm:mb-1">Today's Deals</h3>
-              <p className="text-gray-500 text-xs hidden sm:block mb-4">Save up to 40% off on premium food pantry and home items.</p>
+              <span className="text-[9px] sm:text-[10px] font-extrabold text-plum tracking-wider uppercase mb-0.5 block">Mega Savings</span>
+              <h3 className="font-extrabold text-gray-800 text-xs sm:text-sm md:text-base mb-0.5">Today's Deals</h3>
+              <p className="text-gray-500 text-xs hidden sm:block mb-2.5">Save up to 40% off on premium food pantry and home items.</p>
             </div>
             <button 
               onClick={(e) => { e.stopPropagation(); onScrollToDeals(); }}
-              className="w-fit bg-plum hover:bg-plum-dark text-white text-[10px] sm:text-[11px] font-extrabold py-1 px-3 sm:px-4 sm:py-2 rounded-lg cursor-pointer transition-colors shadow-sm text-center z-10"
+              className="w-fit bg-plum hover:bg-plum-dark text-white text-[10px] sm:text-[11px] font-extrabold py-1 px-3 sm:px-4 sm:py-1.5 rounded-lg cursor-pointer transition-colors shadow-sm text-center z-10"
             >
               Shop Now
             </button>
-            <Tags className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 text-plum/10 absolute -right-2 -bottom-2 sm:-right-4 sm:-bottom-4 -rotate-12 group-hover:scale-110 transition-transform pointer-events-none" />
+            <Tags className="w-12 h-12 sm:w-16 sm:h-16 text-plum/10 absolute -right-2 -bottom-2 sm:-right-3 sm:-bottom-3 -rotate-12 group-hover:scale-110 transition-transform pointer-events-none" />
           </div>
 
           <div 
             onClick={() => onExploreCategory('fresh food')}
-            className="bg-gradient-to-br from-plum-fade to-plum-fade/30 border border-plum/25 rounded-xl p-3 sm:p-4 md:p-6 relative overflow-hidden flex flex-col justify-between shadow-sm group cursor-pointer w-[68vw] min-w-[200px] max-w-[260px] sm:w-auto shrink-0 snap-start hover:border-plum/40 transition-all"
+            className="bg-gradient-to-br from-plum-fade to-plum-fade/30 border border-plum/25 rounded-xl p-3 sm:p-4 relative overflow-hidden flex flex-col justify-between shadow-sm group cursor-pointer w-[68vw] min-w-[200px] max-w-[260px] sm:w-auto shrink-0 snap-start hover:border-plum/40 transition-all"
           >
             <div className="z-10">
-              <span className="text-[9px] sm:text-[10px] font-extrabold text-plum tracking-wider uppercase mb-0.5 sm:mb-1 block">100% Organic</span>
-              <h3 className="font-extrabold text-gray-800 text-xs sm:text-sm md:text-base mb-0.5 sm:mb-1">Farm Fresh</h3>
-              <p className="text-gray-500 text-xs hidden sm:block mb-4">Fresh handpicked vegetables, fruits, butchery cuts & dairy delivered daily.</p>
+              <span className="text-[9px] sm:text-[10px] font-extrabold text-plum tracking-wider uppercase mb-0.5 block">100% Organic</span>
+              <h3 className="font-extrabold text-gray-800 text-xs sm:text-sm md:text-base mb-0.5">Farm Fresh</h3>
+              <p className="text-gray-500 text-xs hidden sm:block mb-2.5">Fresh handpicked vegetables, fruits, butchery cuts & dairy delivered daily.</p>
             </div>
             <button 
               onClick={(e) => { e.stopPropagation(); onExploreCategory('fresh food'); }}
-              className="w-fit bg-plum hover:bg-plum-dark text-white text-[10px] sm:text-[11px] font-extrabold py-1 px-3 sm:px-4 sm:py-2 rounded-lg cursor-pointer transition-colors shadow-sm text-center z-10"
+              className="w-fit bg-plum hover:bg-plum-dark text-white text-[10px] sm:text-[11px] font-extrabold py-1 px-3 sm:px-4 sm:py-1.5 rounded-lg cursor-pointer transition-colors shadow-sm text-center z-10"
             >
               Shop Fresh
             </button>
-            <Leaf className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 text-plum/10 absolute -right-2 -bottom-2 sm:-right-4 sm:-bottom-4 -rotate-12 group-hover:scale-110 transition-transform pointer-events-none" />
+            <Leaf className="w-12 h-12 sm:w-16 sm:h-16 text-plum/10 absolute -right-2 -bottom-2 sm:-right-3 sm:-bottom-3 -rotate-12 group-hover:scale-110 transition-transform pointer-events-none" />
           </div>
 
           <div 
             onClick={onScrollToBrands}
-            className="bg-gradient-to-br from-plum-fade to-plum-fade/30 border border-plum/25 rounded-xl p-3 sm:p-4 md:p-6 relative overflow-hidden flex flex-col justify-between shadow-sm group cursor-pointer w-[68vw] min-w-[200px] max-w-[260px] sm:w-auto shrink-0 snap-start hover:border-plum/40 transition-all"
+            className="bg-gradient-to-br from-plum-fade to-plum-fade/30 border border-plum/25 rounded-xl p-3 sm:p-4 relative overflow-hidden flex flex-col justify-between shadow-sm group cursor-pointer w-[68vw] min-w-[200px] max-w-[260px] sm:w-auto shrink-0 snap-start hover:border-plum/40 transition-all"
           >
             <div className="z-10">
-              <span className="text-[9px] sm:text-[10px] font-extrabold text-plum tracking-wider uppercase mb-0.5 sm:mb-1 block">Best Brands</span>
-              <h3 className="font-extrabold text-gray-800 text-xs sm:text-sm md:text-base mb-0.5 sm:mb-1">Top Brands</h3>
-              <p className="text-gray-500 text-xs hidden sm:block mb-4">Choose from your absolute favorite domestic and global brands.</p>
+              <span className="text-[9px] sm:text-[10px] font-extrabold text-plum tracking-wider uppercase mb-0.5 block">Best Brands</span>
+              <h3 className="font-extrabold text-gray-800 text-xs sm:text-sm md:text-base mb-0.5">Top Brands</h3>
+              <p className="text-gray-500 text-xs hidden sm:block mb-2.5">Choose from your absolute favorite domestic and global brands.</p>
             </div>
             <button 
               onClick={(e) => { e.stopPropagation(); onScrollToBrands(); }}
-              className="w-fit bg-plum hover:bg-plum-dark text-white text-[10px] sm:text-[11px] font-extrabold py-1 px-3 sm:px-4 sm:py-2 rounded-lg cursor-pointer transition-colors shadow-sm text-center z-10"
+              className="w-fit bg-plum hover:bg-plum-dark text-white text-[10px] sm:text-[11px] font-extrabold py-1 px-3 sm:px-4 sm:py-1.5 rounded-lg cursor-pointer transition-colors shadow-sm text-center z-10"
             >
               Explore
             </button>
-            <Star className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 text-plum/10 absolute -right-2 -bottom-2 sm:-right-4 sm:-bottom-4 -rotate-12 group-hover:scale-110 transition-transform pointer-events-none" />
+            <Star className="w-12 h-12 sm:w-16 sm:h-16 text-plum/10 absolute -right-2 -bottom-2 sm:-right-3 sm:-bottom-3 -rotate-12 group-hover:scale-110 transition-transform pointer-events-none" />
           </div>
         </div>
 
         {/* Features Bar */}
-        <div className="flex overflow-x-auto snap-x scrollbar-none sm:grid sm:grid-cols-4 gap-2 sm:gap-4 -mx-2 px-2 sm:mx-0 sm:px-0 mt-3 sm:mt-6">
+        <div className="flex overflow-x-auto snap-x scrollbar-none sm:grid sm:grid-cols-4 gap-2 sm:gap-3.5 -mx-2 px-2 sm:mx-0 sm:px-0 mt-3 sm:mt-3.5">
           <div className="bg-white border border-gray-150 rounded-xl p-2 sm:p-4 flex items-center gap-2 sm:gap-3.5 shadow-sm hover:border-plum/20 hover:shadow transition-all shrink-0 w-[150px] sm:w-auto snap-start">
             <div className="w-7 h-7 sm:w-12 sm:h-12 rounded-lg bg-plum-fade text-plum flex items-center justify-center flex-shrink-0">
               <Truck className="w-3.5 h-3.5 sm:w-6 sm:h-6" />
