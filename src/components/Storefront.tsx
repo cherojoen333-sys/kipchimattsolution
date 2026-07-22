@@ -614,6 +614,26 @@ export default function Storefront({
       title: 'Modern Furniture & Intimate Home Decor',
       subtitle: 'Lounge in style with hand-tufted statement sofas, ergonomic workstations, atmospheric lamps, and elegant organizational shelving.',
       bg: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&q=80&w=1200'
+    },
+    'health': {
+      title: 'Health, Wellness & First Aid',
+      subtitle: 'Nutritional supplements, essential vitamins, first aid medical kits, and health monitoring accessories for family care.',
+      bg: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=1200'
+    },
+    'apparel': {
+      title: 'Everyday Wear, Shoes & Apparel',
+      subtitle: 'Comfortable cotton wear, quality socks, durable footwear, thermal clothing, and versatile fashion basics for all ages.',
+      bg: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&q=80&w=1200'
+    },
+    'sports': {
+      title: 'Fitness, Gym & Travel Gear',
+      subtitle: 'High-performance gym gear, resistance bands, travel luggage bags, hydration flasks, and outdoor adventure equipment.',
+      bg: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=1200'
+    },
+    'books': {
+      title: 'Books, Planners, Diaries & Stationery',
+      subtitle: 'Inspirational reads, yearly productivity planners, leather-bound diaries, educational textbooks, and writing supplies.',
+      bg: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=1200'
     }
   };
 
@@ -799,7 +819,7 @@ export default function Storefront({
                   <div 
                     key={c.key}
                     onClick={() => onCategorySelect(c.key)}
-                    className="bg-white border border-gray-150 rounded-xl p-2.5 md:p-4 text-center cursor-pointer transition-all duration-200 hover:border-plum hover:shadow-md hover:-translate-y-0.5 select-none flex-shrink-0 w-22 sm:w-28 md:w-auto snap-start flex flex-col justify-center items-center"
+                    className="bg-white border border-gray-150 rounded-xl p-2.5 md:p-4 text-center cursor-pointer transition-all duration-200 hover:border-plum hover:shadow-md hover:-translate-y-0.5 select-none flex-shrink-0 w-24 sm:w-28 md:w-auto snap-start flex flex-col justify-center items-center"
                   >
                     <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-plum/5 text-plum flex items-center justify-center mb-1.5">
                       {getCategoryIcon(c.icon)}

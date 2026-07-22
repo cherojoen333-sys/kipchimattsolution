@@ -221,7 +221,7 @@ export default function Header({
               >
                 <div className="relative">
                   <ShoppingCart className="w-6 h-6 text-white" />
-                  <span className="absolute -top-1 left-1/2 -translate-x-1/2 bg-orange text-gray-950 text-[10px] font-black rounded-full px-1 min-w-[16px] text-center leading-none py-0.5 shadow-sm">
+                  <span className="absolute -top-1 left-1/2 -translate-x-1/2 bg-plum text-white text-[10px] font-black rounded-full px-1 min-w-[16px] text-center leading-none py-0.5 shadow-sm border border-white/30">
                     {cartCount}
                   </span>
                 </div>
@@ -299,10 +299,10 @@ export default function Header({
                 {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4.5 h-4.5" />}
               </button>
 
-              {/* Trigger Orange search button */}
+              {/* Trigger Plum search button */}
               <button 
                 type="submit"
-                className="h-full px-5 bg-orange hover:bg-orange/80 text-white flex items-center justify-center cursor-pointer transition-colors shrink-0"
+                className="h-full px-5 bg-plum hover:bg-plum-dark text-white flex items-center justify-center cursor-pointer transition-colors shrink-0"
                 aria-label="Submit Search Query"
               >
                 <Search className="w-5 h-5 stroke-[2.5]" />
@@ -392,7 +392,7 @@ export default function Header({
               >
                 <div className="relative">
                   <ShoppingCart className="w-5.5 h-5.5 text-white" />
-                  <span className="absolute -top-1 left-1/2 -translate-x-1/2 bg-orange text-gray-950 text-[10px] font-black rounded-full px-1 min-w-[16px] text-center leading-none py-0.5 shadow-sm group-hover:scale-105 transition-all duration-150">
+                  <span className="absolute -top-1 left-1/2 -translate-x-1/2 bg-plum text-white text-[10px] font-black rounded-full px-1 min-w-[16px] text-center leading-none py-0.5 shadow-sm border border-white/30 group-hover:scale-105 transition-all duration-150">
                     {cartCount}
                   </span>
                 </div>
@@ -435,7 +435,7 @@ export default function Header({
             {/* Trigger search button */}
             <button 
               type="submit"
-              className="h-full px-4 bg-orange hover:bg-orange/80 text-white flex items-center justify-center cursor-pointer transition-colors shrink-0"
+              className="h-full px-4 bg-plum hover:bg-plum-dark text-white flex items-center justify-center cursor-pointer transition-colors shrink-0"
               aria-label="Submit Search Query"
             >
               <Search className="w-5 h-5 stroke-[2.5]" />
@@ -857,7 +857,7 @@ export default function Header({
                   <span>Shopping Cart</span>
                 </span>
                 {cartCount > 0 && (
-                  <span className="bg-orange text-white text-[10px] px-2 py-0.5 rounded-full font-black animate-pulse">
+                  <span className="bg-plum text-white text-[10px] px-2 py-0.5 rounded-full font-black animate-pulse">
                     {cartCount}
                   </span>
                 )}
